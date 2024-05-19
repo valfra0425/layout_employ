@@ -1,95 +1,54 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import localFont from 'next/font/local'
+import Card from "./components/card/card";
+
+const mont = localFont({
+  src: '../../public/fonts/Mont/Mont-regular.otf',
+  display: 'swap',
+})
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <header className={styles.header}>
+        <div className="logo">
+          <Image src={'/Employ-logo-cor-fundo-preto.png'} height={70} width={168} alt="Logo da empresa Employ" ></Image>
+        </div>
+        <nav>
+          <ul className={styles.navList}>
+            <li className={`${styles.navItem} ${styles.dropdown}`}>
+              <a href="">Product<FontAwesomeIcon style={{marginLeft: '0.375rem'}} color="rgb(161, 163, 170)" height={14} icon={faChevronDown} /></a>
+            </li>
+            <li className={styles.navItem}>
+              <a href="">Learning Center<FontAwesomeIcon style={{marginLeft: '0.375rem'}} color="rgb(161, 163, 170)" height={14} icon={faChevronDown} /></a>
+              </li>
+            <li className={`${styles.navItem} ${styles.active}`}><a href="">Pricing</a></li>
+            <li className={styles.navItem}><a href="">Watch demo</a></li>
+          </ul>
+        </nav>
+        <div >
+          <button type="button" className={styles.button} style={{ marginRight: '10px' }}>Log in</button>
+          <button type="button" className={styles.button}>Get started</button>
+        </div>
+      </header>
+      <div className={styles.persuasiveDiv}>
+        <h1 className={mont.className} style={{marginBottom: "30px", fontSize: "54px"}}>Pick the plan that’s right for you</h1>
+        <p style={{marginBottom: "15px", fontSize: "24px"}}>No credit card required.</p>
+        <div className={styles.subPersuasive}>
+          <span style={{fontWeight: "bold"}}>Billed yearly save 20%</span> | <span>Billed monthly</span>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <main>
+        <div className={styles.cardDiv}>
+          <Card plan="Free" price={0} isfree={true} text="Seriously, free forever" op1="✓ Up to 10 videos" op2="✓ Customizable player" op3="✓ Recording and editing"></Card>
+          <Card plan="Bronze" price={19} isfree={false} text="Billed at $228 per year" op1="✓ Remove Wistia branding" op2="✓ Basic CTAs" op3="✓ Multiple users" complement="Everything in Free, and…"></Card>
+          <Card plan="Silver" price={79} isfree={false} text="Billed at $948 per year" op1="✓ Lead capture forms" op2="✓ Enhanced data analytics" op3="✓ Webinar hosting" complement="Everything in Bronze, and…"></Card>
+          <Card plan="Gold" price={319} isfree={false} text="Billed at $3.828 per year" op1="✓ Marketing integrations" op2="✓ Unlimited video galleries" op3="✓ Custom branded webinars" complement="Everything in Silver, and…"></Card>
+        </div>
+      </main>
+    </>
   );
 }
